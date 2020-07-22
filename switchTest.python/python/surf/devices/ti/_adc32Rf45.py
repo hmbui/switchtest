@@ -43,7 +43,7 @@ class Adc32Rf45(pr.Device):
         jesdDigital     = (0x4 << 14) # With respect to CH  
         decFilter       = (0x5 << 14) # With respect to CH  
         pwrDet          = (0x6 << 14) # With respect to CH        
-        masterPage      = (0x7 << 14)
+        mainPage      = (0x7 << 14)
         analogPage      = (0x8 << 14)
         chA             = (0x0 << 14)
         chB             = (0x8 << 14)        
@@ -82,12 +82,12 @@ class Adc32Rf45(pr.Device):
         ))
                         
         #############
-        # Master Page 
+        # Main Page 
         #############
         self.add(pr.RemoteVariable(   
             name         = "PDN_SYSREF",
             description  = "0 = Normal operation, 1 = SYSREF input capture buffer is powered down and further SYSREF input pulses are ignored",
-            offset       =  (masterPage + (4*0x020)),
+            offset       =  (mainPage + (4*0x020)),
             bitSize      =  1,
             bitOffset    =  4,
             base         = pr.UInt,
@@ -98,7 +98,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "PDN_CHB",
             description  = "0 = Normal operation, 1 = Channel B is powered down",
-            offset       =  (masterPage + (4*0x020)),
+            offset       =  (mainPage + (4*0x020)),
             bitSize      =  1,
             bitOffset    =  1,
             base         = pr.UInt,
@@ -109,7 +109,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "GLOBAL_PDN",
             description  = "0 = Normal operation, 1 = Global power-down enabled",
-            offset       =  (masterPage + (4*0x020)),
+            offset       =  (mainPage + (4*0x020)),
             bitSize      =  1,
             bitOffset    =  0,
             base         = pr.UInt,
@@ -120,7 +120,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "INCR_CM_IMPEDANCE",
             description  = "0 = VCM buffer directly drives the common point of biasing resistors, 1 = VCM buffer drives the common point of biasing resistors with > 5 kOhm",
-            offset       =  (masterPage + (4*0x032)),
+            offset       =  (mainPage + (4*0x032)),
             bitSize      =  1,
             bitOffset    =  5,
             base         = pr.UInt,
@@ -131,7 +131,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "AlwaysWrite0x1_A",
             description  = "Always set this bit to 1",
-            offset       =  (masterPage + (4*0x039)),
+            offset       =  (mainPage + (4*0x039)),
             bitSize      =  1,
             bitOffset    =  6,
             base         = pr.UInt,
@@ -144,7 +144,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "AlwaysWrite0x1_B",
             description  = "Always set this bit to 1",
-            offset       =  (masterPage + (4*0x039)),
+            offset       =  (mainPage + (4*0x039)),
             bitSize      =  1,
             bitOffset    =  4,
             base         = pr.UInt,
@@ -157,7 +157,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "PDN_CHB_EN",
             description  = "This bit enables the power-down control of channel B through the SPI in register 20h: 0 = PDN control disabled, 1 = PDN control enabled",
-            offset       =  (masterPage + (4*0x039)),
+            offset       =  (mainPage + (4*0x039)),
             bitSize      =  1,
             bitOffset    =  1,
             base         = pr.UInt,
@@ -168,7 +168,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "SYNC_TERM_DIS",
             description  = "0 = On-chip, 100-Ohm termination enabled, 1 = On-chip, 100-Ohm termination disabled",
-            offset       =  (masterPage + (4*0x039)),
+            offset       =  (mainPage + (4*0x039)),
             bitSize      =  1,
             bitOffset    =  0,
             base         = pr.UInt,
@@ -179,7 +179,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "SYSREF_DEL_EN",
             description  = "0 = SYSREF delay disabled, 1 = SYSREF delay enabled through register settings [3Ch (bits 1-0), 5Ah (bits 7-5)]",
-            offset       =  (masterPage + (4*0x03C)),
+            offset       =  (mainPage + (4*0x03C)),
             bitSize      =  1,
             bitOffset    =  6,
             base         = pr.UInt,
@@ -190,7 +190,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "SYSREF_DEL_HI",
             description  = "When the SYSREF delay feature is enabled (3Ch, bit 6) the delay can be adjusted in 25-ps steps; the first step is 175 ps. The PVT variation of each 25-ps step is +/-10 ps. The 175-ps step is +/-50 ps",
-            offset       =  (masterPage + (4*0x03C)),
+            offset       =  (mainPage + (4*0x03C)),
             bitSize      =  2,
             bitOffset    =  0,
             base         = pr.UInt,
@@ -201,7 +201,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "JESD_OUTPUT_SWING",
             description  = "These bits select the output amplitude (VOD) of the JESD transmitter for all lanes.",
-            offset       =  (masterPage + (4*0x3D)),
+            offset       =  (mainPage + (4*0x3D)),
             bitSize      =  3,
             bitOffset    =  0,
             base         = pr.UInt,
@@ -212,7 +212,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "SYSREF_DEL_LO",
             description  = "When the SYSREF delay feature is enabled (3Ch, bit 6) the delay can be adjusted in 25-ps steps; the first step is 175 ps. The PVT variation of each 25-ps step is +/-10 ps. The 175-ps step is +/-50 ps",
-            offset       =  (masterPage + (4*0x05A)),
+            offset       =  (mainPage + (4*0x05A)),
             bitSize      =  3,
             bitOffset    =  5,
             base         = pr.UInt,
@@ -223,7 +223,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "SEL_SYSREF_REG",
             description  = "0 = SYSREF is logic low, 1 = SYSREF is logic high",
-            offset       =  (masterPage + (4*0x057)),
+            offset       =  (mainPage + (4*0x057)),
             bitSize      =  1,
             bitOffset    =  4,
             base         = pr.UInt,
@@ -234,7 +234,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "ASSERT_SYSREF_REG",
             description  = "0 = SYSREF is asserted by device pins, 1 = SYSREF can be asserted by the ASSERT SYSREF REG register bit",
-            offset       =  (masterPage + (4*0x057)),
+            offset       =  (mainPage + (4*0x057)),
             bitSize      =  1,
             bitOffset    =  3,
             base         = pr.UInt,
@@ -245,7 +245,7 @@ class Adc32Rf45(pr.Device):
         self.add(pr.RemoteVariable(   
             name         = "SYNCB_POL",
             description  = "0 = Polarity is not inverted, 1 = Polarity is inverted",
-            offset       =  (masterPage + (4*0x058)),
+            offset       =  (mainPage + (4*0x058)),
             bitSize      =  1,
             bitOffset    =  5,
             base         = pr.UInt,
@@ -306,45 +306,45 @@ class Adc32Rf45(pr.Device):
             #####################
             # Global Analog Trims
             #####################
-            self._rawWrite(masterPage + (4*0x0025),0x01) #  Global Analog Trims start here.		
-            self._rawWrite(masterPage + (4*0x0026),0x40) # ...
-            self._rawWrite(masterPage + (4*0x0027),0x80) # ...
-            self._rawWrite(masterPage + (4*0x0029),0x40) # ...
-            self._rawWrite(masterPage + (4*0x002A),0x80) # ...
-            self._rawWrite(masterPage + (4*0x002C),0x40) # ...
-            self._rawWrite(masterPage + (4*0x002D),0x80) # ...
-            self._rawWrite(masterPage + (4*0x002F),0x40) # ...
-            self._rawWrite(masterPage + (4*0x0034),0x01) #  CHB CAP NL DISABLE
-            self._rawWrite(masterPage + (4*0x003F),0x01) #  CHA CAP NL DISABLE
-            self._rawWrite(masterPage + (4*0x0039),0x50) # Iref_50u_inbuf_trim_reg[2:0]  : 0x5
-            self._rawWrite(masterPage + (4*0x003B),0x28) # ...
-            self._rawWrite(masterPage + (4*0x0040),0x80) # CHA Sha settings ( Vref_1p6_profg[2:0]  : 4 : -100m		Incm_prog[2:0]  : 4 : +80m)	
-            self._rawWrite(masterPage + (4*0x0042),0x40) # ...
-            self._rawWrite(masterPage + (4*0x0043),0x80) # ...
-            self._rawWrite(masterPage + (4*0x0045),0x40) # ...
-            self._rawWrite(masterPage + (4*0x0046),0x80) # ...
-            self._rawWrite(masterPage + (4*0x0048),0x40) # ...
-            self._rawWrite(masterPage + (4*0x0049),0x80) # ...
-            self._rawWrite(masterPage + (4*0x004B),0x40) # ...
-            self._rawWrite(masterPage + (4*0x0053),0x60) #  Clk buf Prog_outcm[1:0]  : 2 :   -50m 		 Prog_n_incm[1:0]  : 1 :   -60m		
-            self._rawWrite(masterPage + (4*0x0059),0x02) #  No clock disable
-            self._rawWrite(masterPage + (4*0x005B),0x08) #  Sp reg Outcm_prog[2:0]  : 4 :   -100m
-            self._rawWrite(masterPage + (4*0x0062),0xE0) #  Sha current -60u	
-            self._rawWrite(masterPage + (4*0x0065),0x81) #  Incm ->  m200m	
-            self._rawWrite(masterPage + (4*0x006B),0x04) #  	
-            self._rawWrite(masterPage + (4*0x006C),0x08) #  CSET disable	
-            self._rawWrite(masterPage + (4*0x006E),0x80) #   Iref_10u_comp_trim  : 2 :   20u	
-            self._rawWrite(masterPage + (4*0x006F),0xC0) #  Intr_coarse_ref_trim  : 3 :   60u	
-            self._rawWrite(masterPage + (4*0x0070),0xC0) #  CSET disable	
-            self._rawWrite(masterPage + (4*0x0071),0x03) #   CSET disable	
-            self._rawWrite(masterPage + (4*0x0076),0xA0) #  Prog_stg1_idac_large  : 1 :   880u	
-            self._rawWrite(masterPage + (4*0x0077),0x0A) #  Prog_stg1_idac_large  : 1 :   880u	
-            self._rawWrite(masterPage + (4*0x007D),0x41) #  Clamp dis and Prog_sha_load_cap[1:0]  : 1 : 0f	
-            self._rawWrite(masterPage + (4*0x0081),0x18) #  In_clk_delay_prog[2:0]  : 7 :   240f	
-            self._rawWrite(masterPage + (4*0x0084),0x55) #  Prog_stg1_idac_large  : 1 :   880u	
-            self._rawWrite(masterPage + (4*0x008A),0x41) #  Clamp dis and Prog_sha_load_cap[1:0]  : 1 : 0f	
-            self._rawWrite(masterPage + (4*0x008E),0x18) #  In_clk_delay_prog[2:0]  : 7 :   240f	
-            self._rawWrite(masterPage + (4*0x005c),0x07) #  No fuse blown, val = 0x00 //Refsys fuse en =0x07 - NEW PG            
+            self._rawWrite(mainPage + (4*0x0025),0x01) #  Global Analog Trims start here.		
+            self._rawWrite(mainPage + (4*0x0026),0x40) # ...
+            self._rawWrite(mainPage + (4*0x0027),0x80) # ...
+            self._rawWrite(mainPage + (4*0x0029),0x40) # ...
+            self._rawWrite(mainPage + (4*0x002A),0x80) # ...
+            self._rawWrite(mainPage + (4*0x002C),0x40) # ...
+            self._rawWrite(mainPage + (4*0x002D),0x80) # ...
+            self._rawWrite(mainPage + (4*0x002F),0x40) # ...
+            self._rawWrite(mainPage + (4*0x0034),0x01) #  CHB CAP NL DISABLE
+            self._rawWrite(mainPage + (4*0x003F),0x01) #  CHA CAP NL DISABLE
+            self._rawWrite(mainPage + (4*0x0039),0x50) # Iref_50u_inbuf_trim_reg[2:0]  : 0x5
+            self._rawWrite(mainPage + (4*0x003B),0x28) # ...
+            self._rawWrite(mainPage + (4*0x0040),0x80) # CHA Sha settings ( Vref_1p6_profg[2:0]  : 4 : -100m		Incm_prog[2:0]  : 4 : +80m)	
+            self._rawWrite(mainPage + (4*0x0042),0x40) # ...
+            self._rawWrite(mainPage + (4*0x0043),0x80) # ...
+            self._rawWrite(mainPage + (4*0x0045),0x40) # ...
+            self._rawWrite(mainPage + (4*0x0046),0x80) # ...
+            self._rawWrite(mainPage + (4*0x0048),0x40) # ...
+            self._rawWrite(mainPage + (4*0x0049),0x80) # ...
+            self._rawWrite(mainPage + (4*0x004B),0x40) # ...
+            self._rawWrite(mainPage + (4*0x0053),0x60) #  Clk buf Prog_outcm[1:0]  : 2 :   -50m 		 Prog_n_incm[1:0]  : 1 :   -60m		
+            self._rawWrite(mainPage + (4*0x0059),0x02) #  No clock disable
+            self._rawWrite(mainPage + (4*0x005B),0x08) #  Sp reg Outcm_prog[2:0]  : 4 :   -100m
+            self._rawWrite(mainPage + (4*0x0062),0xE0) #  Sha current -60u	
+            self._rawWrite(mainPage + (4*0x0065),0x81) #  Incm ->  m200m	
+            self._rawWrite(mainPage + (4*0x006B),0x04) #  	
+            self._rawWrite(mainPage + (4*0x006C),0x08) #  CSET disable	
+            self._rawWrite(mainPage + (4*0x006E),0x80) #   Iref_10u_comp_trim  : 2 :   20u	
+            self._rawWrite(mainPage + (4*0x006F),0xC0) #  Intr_coarse_ref_trim  : 3 :   60u	
+            self._rawWrite(mainPage + (4*0x0070),0xC0) #  CSET disable	
+            self._rawWrite(mainPage + (4*0x0071),0x03) #   CSET disable	
+            self._rawWrite(mainPage + (4*0x0076),0xA0) #  Prog_stg1_idac_large  : 1 :   880u	
+            self._rawWrite(mainPage + (4*0x0077),0x0A) #  Prog_stg1_idac_large  : 1 :   880u	
+            self._rawWrite(mainPage + (4*0x007D),0x41) #  Clamp dis and Prog_sha_load_cap[1:0]  : 1 : 0f	
+            self._rawWrite(mainPage + (4*0x0081),0x18) #  In_clk_delay_prog[2:0]  : 7 :   240f	
+            self._rawWrite(mainPage + (4*0x0084),0x55) #  Prog_stg1_idac_large  : 1 :   880u	
+            self._rawWrite(mainPage + (4*0x008A),0x41) #  Clamp dis and Prog_sha_load_cap[1:0]  : 1 : 0f	
+            self._rawWrite(mainPage + (4*0x008E),0x18) #  In_clk_delay_prog[2:0]  : 7 :   240f	
+            self._rawWrite(mainPage + (4*0x005c),0x07) #  No fuse blown, val = 0x00 //Refsys fuse en =0x07 - NEW PG            
             #########################
             # Additional Analog trims
             #########################
